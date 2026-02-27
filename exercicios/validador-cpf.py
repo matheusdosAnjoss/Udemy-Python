@@ -23,8 +23,25 @@ contrário disso:
 
 O primeiro dígito do CPF é 7
 """
+import re
+import sys
 #Primeiro Digito
-cpf_usuario = '53633159800'
+#cpf_usuario = '536.331.598-00'.replace('.','',).replace('-', '')
+
+entrada = input('cpf: ')
+cpf_usuario = re.sub(
+    r'[^0-9]',
+    '',
+    entrada
+)
+
+entrada_e_sequencial = entrada == entrada[0] * len(entrada)
+
+if entrada_e_sequencial:
+    print('Voce mandou entrada sequencias')
+    sys.exit()
+
+
 nove_digitos = cpf_usuario[:9]
 cont_regressivo_1 = 10
 resultado_digito_1 = 0
@@ -100,4 +117,5 @@ if cpf_usuario == cpf_gerado_calculo:
 else:
     print('CPF Invalido!')
 
+print(cpf_usuario)
 print('-'*20)
