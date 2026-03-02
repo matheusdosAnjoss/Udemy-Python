@@ -28,6 +28,11 @@ import sys
 #Primeiro Digito
 #cpf_usuario = '536.331.598-00'.replace('.','',).replace('-', '')
 
+# Usa a função sub do módulo re (expressões regulares)
+# r'[^0-9]' significa: "qualquer caractere que NÃO seja um número de 0 a 9"
+# '' indica que esses caracteres serão substituídos por nada (removidos)
+# entrada é o texto digitado pelo usuário
+# Resultado: o CPF fica apenas com números, sem pontos, espaços ou traços
 entrada = input('cpf: ')
 cpf_usuario = re.sub(
     r'[^0-9]',
