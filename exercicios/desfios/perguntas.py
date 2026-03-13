@@ -1,3 +1,4 @@
+from rich import print
 pergurtas = [
     {
         'pergunta': 'Quantos é 2+2? ',
@@ -18,6 +19,9 @@ pergurtas = [
     }
 ]
 
+acertou = 0
+errou = 0
+
 for p in pergurtas:
     print(p['pergunta'])
 
@@ -30,13 +34,21 @@ for p in pergurtas:
             resposta = int(input('Escolha uma opção: '))
 
             if resposta == p['resposta']:
+                acertou += 1
                 print('=='*10)
-                print("Você acertou 👏👍")
+                print("[green]Você acertou 👏👍")
                 print('=='*10)
                 break
             else:
-                print('ERROU! Tente outra vez')
+                errou += 1
+                print('=='*10)
+                print('[red]ERROU!')
+                print('=='*10)
+                break
         except ValueError:
             print('Digite apenas o numero da opcao')
 
-print('Parabens você acertou todas as perguntas! 🥳')
+if acertou >= 1:
+    print(f'Parabens você acertou {acertou} perguntas! 🥳')
+else:
+    print('[red]Você Errou todas as perguntas tente novamente!')
