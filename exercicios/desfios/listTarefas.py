@@ -1,3 +1,18 @@
+def LerInt(msg):
+    try:
+        n = int(input(msg))
+        return n
+    except(ValueError, TypeError):
+        print('[ERRO]: Digite um numero!')
+        
+def titulo(msg):
+    print('=='*15)
+    print(msg.center(30))
+    print('=='*15)
+
+def linha(tam=12):
+    print('=='*tam)
+
 def mostraTarefa(tarefas):
     if not tarefas:
         print("Listar Vazia")
@@ -17,30 +32,33 @@ def desfazer(tarefas, tarefasRefazer):
     
 
 def refazer(tarefas, tarefasRefazer):
-    if not tarefas:
+    if not tarefasRefazer:
         print('Nada para refazer.')
         return
     
     tarefa = tarefasRefazer.pop()
     tarefas.append(tarefa)
+    titulo(f'Tarefa "{tarefa}" refeita com sucesso!')
     
 
 tarefas = []
 tarefa_refazer = []
 
 while True:         #aula 195 10:20
+    titulo('LISTA DE TAREFAS')
+    
     print("\n1 - Adicionar tarefa")
     print("2 - Desfazer")
     print("3 - Refazer")
     print("4 - Mostrar tarefas")
     print("0 - Sair")
 
-    opcao = int(input('Escolha: '))
-    
-
+    opcao = LerInt('Escolha: ')
+    linha()
     if opcao == 1:
         tarefa = str(input('Digite a tarefa: '))
         tarefas.append(tarefa)
+        linha()
         print('TAREFAS:')
         mostraTarefa(tarefas)
 
