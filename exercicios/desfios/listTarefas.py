@@ -1,9 +1,12 @@
+import json
+
 def LerInt(msg):
-    try:
-        n = int(input(msg))
-        return n
-    except(ValueError, TypeError):
-        print('[ERRO]: Digite um numero!')
+    while True: # ALTERADO: Adicionado loop para não retornar vazio
+        try:
+            n = int(input(msg))
+            return n
+        except(ValueError, TypeError):
+            print('[ERRO]: Digite um numero válido!')
         
 def titulo(msg):
     print('=='*15)
@@ -39,9 +42,27 @@ def refazer(tarefas, tarefasRefazer):
     tarefa = tarefasRefazer.pop()
     tarefas.append(tarefa)
     titulo(f'Tarefa "{tarefa}" refeita com sucesso!')
-    
 
-tarefas = []
+def ler_tarefas(caminho_arquivo):
+    """Tenta carregar as tarefas do arquivo JSON. Se não existir, retorna lista vazia."""
+    try:
+        with open(caminho_arquivo, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        print('Arquivo não existir!')
+        return [] # Primeira vez rodando o programa, o arquivo ainda não existe
+
+def SalvarTarefas(tarefas):
+    with open("list_tarefa.json", 'w', encoding='utf8') as arquivo:
+        json.dump(
+            tarefas,
+            arquivo,
+            indent=4,
+            ensure_ascii=False
+        )
+    
+CAMINHO_ARQUIVO = 'list_tarefa.json'
+tarefas = ler_tarefas(CAMINHO_ARQUIVO)
 tarefa_refazer = []
 
 while True:         #aula 195 10:20
@@ -61,13 +82,16 @@ while True:         #aula 195 10:20
         linha()
         print('TAREFAS:')
         mostraTarefa(tarefas)
+        SalvarTarefas(tarefas)
 
     elif opcao == 2:
         desfazer(tarefas, tarefa_refazer)
+        SalvarTarefas(tarefas)
         mostraTarefa(tarefas)
 
     elif opcao == 3:
         refazer(tarefas, tarefa_refazer)
+        SalvarTarefas(tarefas)
         mostraTarefa(tarefas)
 
     elif opcao == 4:
