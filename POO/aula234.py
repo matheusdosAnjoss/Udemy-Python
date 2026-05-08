@@ -30,9 +30,11 @@ def notificar(notificacao: Notificacao):
         print('Notificação NÂO enviada')
 
 
-n1 = NotificacaoEmail('Mensagem enviada')
-n2 = NotificacaoSms('Testando notificacao')
+# n1 = NotificacaoEmail('Mensagem enviada')
+# n2 = NotificacaoSms('Testando notificacao')
 
 # n1.enviar()
 # n2.enviar()
 notificar(NotificacaoEmail('testando email'))
+print()
+notificar(NotificacaoSms('testando SMS'))
