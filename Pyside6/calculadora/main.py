@@ -2,10 +2,12 @@ import sys
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QMainWindow, QLabel
 from variaveis import WINDOW_ICON_PATH
+from display import Display
 
 from main_window import MainWindow
 
 if __name__ == '__main__':
+    #cria a aplicação
     app = QApplication(sys.argv)
     window = MainWindow()
 
@@ -14,9 +16,13 @@ if __name__ == '__main__':
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
 
-    label1 = QLabel('O meu label')
-    label1.setStyleSheet('font-size: 30px')
-    window.addWidgetToLayout(label1)
+    #Display
+    display = Display()
+    window.addToVLayout(display)
+
+    # label1 = QLabel('O meu label')
+    # label1.setStyleSheet('font-size: 30px')
+    # window.addToVLayout(label1)
     
     window.ajustFixedSize()
     window.show()

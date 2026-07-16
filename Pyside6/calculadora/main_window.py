@@ -7,8 +7,8 @@ class MainWindow(QMainWindow):
         super().__init__(parent, *args, **kwargs)
 
         self.cw = QWidget()
-        self.v_layout = QVBoxLayout()
-        self.cw.setLayout(self.v_layout)
+        self.vLayout = QVBoxLayout()
+        self.cw.setLayout(self.vLayout)
         self.setCentralWidget(self.cw)
         
         self.setWindowTitle('Calculadora')
@@ -18,8 +18,8 @@ class MainWindow(QMainWindow):
         self.adjustSize()
         self.setFixedSize(self.width(), self.height())
 
-    def addWidgetToLayout(self, widget: QWidget):
-        self.v_layout.addWidget(widget)
+    def addToVLayout(self, widget: QWidget):
+        self.vLayout.addWidget(widget)
         
     
 
