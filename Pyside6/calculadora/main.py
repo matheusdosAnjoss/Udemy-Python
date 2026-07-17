@@ -3,6 +3,7 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QMainWindow, QLabel
 from variaveis import WINDOW_ICON_PATH
 from display import Display
+from info import Info
 
 from main_window import MainWindow
 
@@ -15,6 +16,10 @@ if __name__ == '__main__':
     icon = QIcon(str(WINDOW_ICON_PATH))
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
+
+    #Info
+    info = Info('2*2 = 4')
+    window.addToVLayout(info)
 
     #Display
     display = Display()
