@@ -1,6 +1,6 @@
 import sys
- 
-# from buttons import ButtonsGrid
+#from buttons import ButtonsGrid
+from buttons import Button
 from display import Display
 from info import Info
 from main_window import MainWindow
@@ -29,6 +29,8 @@ if __name__ == '__main__':
     window.addToVLayout(display)
  
     #Grid
+    button = Button('texto botao')
+    window.addToVLayout(button)
     # buttonsGrid = ButtonsGrid(display, info, window)
     # window.vLayout.addLayout(buttonsGrid)
  
