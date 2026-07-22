@@ -1,6 +1,5 @@
 import sys
-#from buttons import ButtonsGrid
-from buttons import Button
+from buttons import Button, ButtonsGrid
 from display import Display
 from info import Info
 from main_window import MainWindow
@@ -22,17 +21,22 @@ if __name__ == '__main__':
  
     # Info
     info = Info('Sua conta')
-    window.addToVLayout(info)
+    window.addWidgetToVLayout(info)
  
     # Display
     display = Display()
-    window.addToVLayout(display)
+    window.addWidgetToVLayout(display)
  
     #Grid
-    button = Button('texto botao')
-    window.addToVLayout(button)
-    # buttonsGrid = ButtonsGrid(display, info, window)
-    # window.vLayout.addLayout(buttonsGrid)
+    buttonsGrid = ButtonsGrid()
+    window.vLayout.addLayout(buttonsGrid)
+
+    button1 = Button('texto botao')
+    buttonsGrid.addWidget(button1, 0, 0)
+
+    button2 = Button('texto botao')
+    buttonsGrid.addWidget(button2, 0, 1)
+
  
     # Executa tudo
     window.ajustFixedSize()
