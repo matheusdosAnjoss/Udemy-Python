@@ -1,5 +1,5 @@
 import sys
-from buttons import Button, ButtonsGrid
+from buttons import ButtonsGrid
 from display import Display
 from info import Info
 from main_window import MainWindow
@@ -31,11 +31,11 @@ if __name__ == '__main__':
     buttonsGrid = ButtonsGrid()
     window.vLayout.addLayout(buttonsGrid)
 
-    button1 = Button('texto botao')
-    buttonsGrid.addWidget(button1, 0, 0)
+    # button1 = Button('texto botao')
+    # buttonsGrid.addWidget(button1, 0, 0)
 
-    button2 = Button('texto botao')
-    buttonsGrid.addWidget(button2, 0, 1)
+    # button2 = Button('texto botao')
+    # buttonsGrid.addWidget(button2, 0, 1)
 
  
     # Executa tudo
