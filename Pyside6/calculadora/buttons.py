@@ -3,6 +3,13 @@ from PySide6.QtCore import Slot
 from utils import isEmpty, isNumOrDot, isValidNumber
 from display import Display
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from display import Display
+    from info import Info
+
+
 class Button(QPushButton):
     def __init__(self, /, parent: QWidget | None = None, *args, **kwargs) -> None:
         super().__init__(parent, *args, **kwargs)
@@ -14,7 +21,7 @@ class Button(QPushButton):
 
 
 class ButtonsGrid(QGridLayout):
-    def __init__(self, display: Display, *args, **kwargs):
+    def __init__(self, display: 'Display', info: 'Info', *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self._gridMask = [
@@ -24,9 +31,22 @@ class ButtonsGrid(QGridLayout):
             ['1', '2', '3', '+'],
             ['',  '0', '.', '='],
         ]
-
+        self.info = info
         self.display = display
+        self._equation = ''
+
+
+        self.equation = 'Mudei agora'
         self._makeGrid()
+
+    @property
+    def equation(self):
+        return self._equation
+
+    @equation.setter
+    def equation(self, value):
+        self._equation = value
+        self.info.setText(value)
 
     def _makeGrid(self):
         for i, rowData in enumerate(self._gridMask):
