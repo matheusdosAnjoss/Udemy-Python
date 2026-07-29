@@ -34,9 +34,12 @@ class ButtonsGrid(QGridLayout):
         self.info = info
         self.display = display
         self._equation = ''
+        self._equationInitalValue = 'Sua conta'
+        self._left = None
+        self._right = None  
+        self._op = None
 
-
-        self.equation = 'Mudei agora'
+        self.equation = self._equationInitalValue
         self._makeGrid()
 
     @property
@@ -70,8 +73,12 @@ class ButtonsGrid(QGridLayout):
 
         if text == 'C':
             self._conectButtonClicked(button, self._clear)
-           
-            
+
+        if text in '+-*/':
+            self._conectButtonClicked(
+                button,
+                self._makeSlot(self._operatorClicked, button)
+            )
 
     def _makeSlot(self, func, *args, **kwargs):
         @Slot(bool)
@@ -90,5 +97,25 @@ class ButtonsGrid(QGridLayout):
         self.display.insert(button_text)
 
     def _clear(self):
+        self._left = None
+        self._right = None  
+        self._op = None
+        self.equation = self._equationInitalValue
         self.display.clear()
+
+    def _operatorClicked(self, button):
+        buttonText = button.text()
+        displayText = self.display.text()
+        self.display.clear()
+
+        if not isValidNumber(displayText) and self._left is None:
+            print('nao tem nada para colocar no valor da esquerda')
+            return
+
+        if self._left is None:
+            self._left = float(displayText)
+
+        self._op = buttonText
+        self.equation = f'{self._left} {self._op} ??'
+
         
