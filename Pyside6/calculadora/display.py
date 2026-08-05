@@ -1,9 +1,12 @@
 from PySide6.QtWidgets import QLineEdit
 from variaveis import BIG_FONT_SIZE, TEXT_MARGIN
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Signal
+from PySide6.QtGui import QKeyEvent
+
+class Display(QLineEdit):
+    eqRequested = Signal()   
 
 
-class Display(QLineEdit):   
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.configStyle()
@@ -15,3 +18,14 @@ class Display(QLineEdit):
         self.setMinimumWidth(500)
         self.setAlignment(Qt.AlignmentFlag.AlignRight)
         self.setTextMargins(*margins)
+
+    def keyPressEvent(self, event: QKeyEvent) -> None:
+        key = event.key()
+        KEYS = Qt.Key
+
+        isEnter = key in [KEYS.Key_Enter, KEYS.Key_Return]
+
+        if isEnter:
+            print('precionou enter')
+            self.eqRequested.emit()
+            return event.ignore()
