@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QPushButton, QWidget, QGridLayout
 from PySide6.QtCore import Slot
-from utils import isEmpty, isNumOrDot, isValidNumber
+from utils import isEmpty, isNumOrDot, isValidNumber, converToNumber
 from display import Display
 import math
 
@@ -32,7 +32,7 @@ class ButtonsGrid(QGridLayout):
             ['7', '8', '9', '*'],
             ['4', '5', '6', '-'],
             ['1', '2', '3', '+'],
-            ['',  '0', '.', '='],
+            ['N',  '0', '.', '='],
         ]
         self.info = info
         self.display = display
@@ -88,6 +88,9 @@ class ButtonsGrid(QGridLayout):
         if text == 'D':
             self._conectButtonClicked(button, self.display.backspace)
 
+        if text == 'N':
+            self._conectButtonClicked(button, self._inverteNuber)
+
         if text in '+-*/^':
             self._conectButtonClicked(
                 button,
@@ -113,6 +116,17 @@ class ButtonsGrid(QGridLayout):
         self.display.insert(text)
 
     @Slot()
+    def _inverteNuber(self):
+        displayText = self.display.text()
+
+        if not isValidNumber(displayText):
+            return
+
+        number = converToNumber(displayText) * -1
+        self.display.setText(str(number))
+
+
+    @Slot()
     def _clear(self):
         self._left = None
         self._right = None  
@@ -131,7 +145,7 @@ class ButtonsGrid(QGridLayout):
             return
 
         if self._left is None:
-            self._left = float(displayText)
+            self._left = converToNumber(displayText)
 
         self._op = buttonText
         self.equation = f'{self._left} {self._op} ??'
@@ -145,7 +159,7 @@ class ButtonsGrid(QGridLayout):
             self._showError('Conta incompleta.')
             return
 
-        self._right = float(displayText)
+        self._right = converToNumber(displayText)
         self.equation = f'{self._left} {self._op} {self._right}'
         result = 'error'
 
