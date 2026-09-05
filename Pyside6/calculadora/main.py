@@ -7,7 +7,7 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication
 from style import setupTheme
 from variaveis import WINDOW_ICON_PATH
- 
+
 if __name__ == '__main__':
     # Cria a aplicação
     app = QApplication(sys.argv)
