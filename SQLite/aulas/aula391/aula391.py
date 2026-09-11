@@ -25,12 +25,27 @@ cursor.execute(
 connection.commit()
 
 # REGISTRA VALOR NAS COLUNAS
-cursor.execute(
-    f'INSERT INTO {TABLE_NAME} (id, name, weight) '
-    'VALUES ' 
-    "(NULL, 'Luis Otavio', 9.9), (NULL, 'Matheus', 7.5)"
+sql = (
+    f'INSERT INTO {TABLE_NAME}'
+    '(name, weight)'
+    'VALUES'
+    '(?, ?)'
 )
+
+cursor.executemany(sql, (
+    ('Ana', 10),
+    ('Diego', 40),
+    ('João', 30),
+    ('Pedro', 20),
+))
 connection.commit()
+
+# cursor.execute(
+#     f'INSERT INTO {TABLE_NAME} (id, name, weight) '
+#     'VALUES ' 
+#     "(NULL, 'Luis Otavio', 9.9), (NULL, 'Matheus', 7.5)"
+# )
+# connection.commit()
 
 
 cursor.close()
