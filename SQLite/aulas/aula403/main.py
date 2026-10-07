@@ -31,6 +31,7 @@ with connection:
         cursor.execute(f'TRUNCATE TABLE {TABLE_NAME}')
     connection.commit()
 
+    # Inserindo um cliente com tupla
     with connection.cursor() as cursor:
         #SQL
         sql = (
@@ -45,6 +46,7 @@ with connection:
         # print(result)
     connection.commit()
 
+    # Inserindo usando um dicionário
     with connection.cursor() as cursor:
         #SQL
         sql = (
@@ -63,6 +65,7 @@ with connection:
         # print(result)
     connection.commit()
 
+    # Inserindo vários clientes com executemany()
     with connection.cursor() as cursor:
         sql = (
             f'INSERT INTO {TABLE_NAME} '
@@ -83,7 +86,7 @@ with connection:
         # print(result)
     connection.commit()
 
-
+    #4. Outra forma de usar executemany()
     with connection.cursor() as cursor:
         sql = (
             f'INSERT INTO {TABLE_NAME} '
