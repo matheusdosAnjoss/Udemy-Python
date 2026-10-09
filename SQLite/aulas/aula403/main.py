@@ -1,4 +1,5 @@
 import pymysql
+import pymysql.cursors
 import os
 import dotenv
 
@@ -12,6 +13,7 @@ connection = pymysql.connect(
     password=os.environ['MYSQL_PASSWORD'],
     database=os.environ['MYSQL_DATABASE'],
     charset='utf8mb4',
+    cursorclass=pymysql.cursors.DictCursor,
 )
 
 print(os.environ['MYSQL_DATABASE'])
@@ -126,21 +128,36 @@ with connection:
         # for row in data5:
         #     print(row)
 
-    # Apagando valores
+    # Apagando valores com DELETE
     with connection.cursor() as cursor:
         sql = (
             f'DELETE FROM {TABLE_NAME} '
             f'WHERE id = %s'
         )
 
-        cursor.execute(sql, (3))
+        cursor.execute(sql, (1))
         connection.commit()
         
         cursor.execute(f'SELECT * FROM {TABLE_NAME} ')  
         
+        # for row in cursor.fetchall():
+        #     print(row)
+   
+
+   # Editando com UPDATE
+    with connection.cursor() as cursor:
+        sql = (
+            f'UPDATE {TABLE_NAME} '
+            'SET nome=%s, idade=%s '
+            'WHERE id=%s'
+        )
+    
+        cursor.execute(sql, ('Gustavo', 35, 5))
+        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')  
+            
         for row in cursor.fetchall():
             print(row)
-   
+    connection.commit()
 
 
 
