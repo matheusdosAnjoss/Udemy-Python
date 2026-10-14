@@ -153,10 +153,14 @@ with connection:
         )
     
         cursor.execute(sql, ('Gustavo', 35, 5))
-        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')  
-            
+        ReusultFromSelect =  cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
+
         for row in cursor.fetchall():
             print(row)
+
+        print(ReusultFromSelect)
+
+
     connection.commit()
 
 
