@@ -9,7 +9,7 @@ def blog(request):
     )
 
 def exemplo(request):
-    print('Exemplo')
+    print('exemplo')
     return render(
         request,
         'blog/exemplo.html'
